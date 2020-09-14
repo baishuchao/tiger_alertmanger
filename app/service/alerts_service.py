@@ -8,14 +8,16 @@ from app.model.alerts_model import Alerts
 
 
 def add_alerts(data):
-    # for i in data:
-    #     db_data = Alerts(name=i['labels']['alertname'],
-    #                      environment=i['labels']['task'],
-    #                      detail=i['annotations']['detail'],
-    #                      alarm_time=human_format_time(i['startsAt']))
-    #     db.session.add(db_data)
-    #     db.session.commit()
-    #
+    for i in data:
+        data = {"name": i['labels']['alertname'],
+                "detail": i['annotations']['detail'],
+                "alarm_time": human_format_time(i['startsAt']),
+                "environment": i['labels']['task'],
+                "alarm_status": "告警"}
+        print(i)
+        # db.session.add(db_data)
+        # db.session.commit()
+
 
     data = Alerts.query.filter_by(id=1).all()
     print(data)
